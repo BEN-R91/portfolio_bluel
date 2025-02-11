@@ -41,27 +41,41 @@ function displayCategories(categories) {
   // Bouton pour afficher toutes les œuvres
   const allButton = document.createElement('button'); // Créé le bouton "Tous".
   allButton.textContent = "Tous"; // Texte du bouton.
+  allButton.className =  "filterbutton"
   filtersContainer.appendChild(allButton); 
 
   allButton.addEventListener('click', () => { // Ajoute un eventListener pour réinitialiser filteredWorks avec toutes les œuvres et mettre à jour la galerie.
     filteredWorks = allWorks; // Réinitialise les données filtrées à toutes les œuvres
     displayGallery(filteredWorks); // Met à jour la galerie
+    updateFilterStyle(0)
   });
 
   // Boutons pour chaque catégorie
-  categories.forEach(category => {
+  categories.forEach((category, index) => {
     const button = document.createElement('button');
     button.textContent = category.name; // Tetxte des boutons selon les catégories (category.name).
+    button.className =  "filterbutton"
     filtersContainer.appendChild(button);
 
   // Filtrer les données en fonction de la catégorie sélectionnée
     button.addEventListener('click', () => { 
       filteredWorks = allWorks.filter(work => work.categoryId === category.id); // filter() : Crée un nouveau tableau avec les œuvres dont categoryId correspond à l'ID de la catégorie.
       displayGallery(filteredWorks); // Appelle displayGallery(filteredWorks) pour afficher uniquement les œuvres filtrées.
+      updateFilterStyle(index+1); 
     });
   });
 }
 
+function updateFilterStyle(index) {
+  const dots = document.querySelectorAll('.filterbutton'); //On selectionne tout les éléments avec la classe 'dot' avec 'querySelectorAll
+  dots.forEach((dot, i) => { //parcour tout les dots
+      if (i === index) { // condition pour appliquer 'dot selected' 
+          dot.classList.add('dot_selected');
+      } else {
+          dot.classList.remove('dot_selected');
+      }
+    })
+  }
 // Appels des fonctions pour charger les données
 getWorks();
 getCategories();
