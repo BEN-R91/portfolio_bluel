@@ -67,12 +67,12 @@ function displayCategories(categories) {
 }
 
 function updateFilterStyle(index) {
-  const dots = document.querySelectorAll('.filterbutton'); //On selectionne tout les éléments avec la classe 'dot' avec 'querySelectorAll
-  dots.forEach((dot, i) => { //parcour tout les dots
-      if (i === index) { // condition pour appliquer 'dot selected' 
-          dot.classList.add('dot_selected');
+  const buttons = document.querySelectorAll('.filterbutton'); //On selectionne tout les éléments avec la classe 'button' avec 'querySelectorAll
+  buttons.forEach((button, i) => { //parcour tout les buttons
+      if (i === index) { // condition pour appliquer 'button selected' 
+          button.classList.add('filterbutton_selected');
       } else {
-          dot.classList.remove('dot_selected');
+          button.classList.remove('filterbutton_selected');
       }
     })
   }
