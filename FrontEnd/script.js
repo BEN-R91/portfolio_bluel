@@ -76,6 +76,8 @@ function updateFilterStyle(index) {
       }
     })
   }
+
+  
 // Appels des fonctions pour charger les données
 getWorks();
 getCategories();

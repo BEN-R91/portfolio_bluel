@@ -99,6 +99,12 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -235,7 +241,8 @@ input[type="submit"] {
 }
 
 .forgetpassword {
-	color: black;
+	color:black;
+	text-decoration: underline;
 }
 
 #login {
