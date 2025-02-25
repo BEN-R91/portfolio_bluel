@@ -76,8 +76,26 @@ function updateFilterStyle(index) {
       }
     })
   }
-
+///////////////////////////////////////////////////////////*********************************** */
+  function checkAuth() {
+    const authToken = localStorage.getItem("authToken");
+    const loginLink = document.querySelector('nav ul li a[href="loginpage.html"]');
   
+    if (authToken) {
+      // Si l'utilisateur est connecté, changer le bouton en Logout
+      loginLink.innerText = "logout";
+      loginLink.href = "#"; // On empêche la redirection vers la page de login
+      loginLink.addEventListener("click", logout);
+    }
+  }
+  
+  function logout() {
+    localStorage.removeItem("authToken"); // Supprimer le token
+    window.location.href = "loginpage.html"; // Rediriger vers la page de login
+  }
+  
+  // Exécuter la vérification au chargement de la page
+  document.addEventListener("DOMContentLoaded", checkAuth);
 // Appels des fonctions pour charger les données
 getWorks();
 getCategories();
