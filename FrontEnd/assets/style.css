@@ -85,6 +85,14 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+.title_project {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;

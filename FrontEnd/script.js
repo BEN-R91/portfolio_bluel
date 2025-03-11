@@ -80,15 +80,25 @@ function updateFilterStyle(index) {
   function checkAuth() {
     const authToken = localStorage.getItem("authToken");
     const loginLink = document.querySelector('nav ul li a[href="loginpage.html"]');
+    const filtersContainer = document.querySelector('.filters');
+    const link_modal = document.querySelector('.link_modal');
   
     if (authToken) {
       // Si l'utilisateur est connecté, changer le bouton en Logout
       loginLink.innerText = "logout";
       loginLink.href = "#"; // On empêche la redirection vers la page de login
       loginLink.addEventListener("click", logout);
-    }
-  }
   
+      // Masquer les catégories si elles existent
+      if (filtersContainer) {
+        filtersContainer.style.display = "none";
+      }
+  }
+    else {
+      
+      link_modal.style.display = "none";
+    }
+}
   function logout() {
     localStorage.removeItem("authToken"); // Supprimer le token
     window.location.href = "loginpage.html"; // Rediriger vers la page de login
