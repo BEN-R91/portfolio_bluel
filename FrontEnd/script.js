@@ -76,7 +76,7 @@ function updateFilterStyle(index) {
       }
     })
   }
-///////////////////////////////////////////////////////////*********************************** */
+
   function checkAuth() {
     const authToken = localStorage.getItem("authToken");
     const loginLink = document.querySelector('nav ul li a[href="loginpage.html"]');
@@ -97,15 +97,30 @@ function updateFilterStyle(index) {
     else {
       
       link_modal.style.display = "none";
+      edition_mode.style.display = "none";
     }
 }
   function logout() {
     localStorage.removeItem("authToken"); // Supprimer le token
     window.location.href = "loginpage.html"; // Rediriger vers la page de login
   }
-  
-  // Exécuter la vérification au chargement de la page
-  document.addEventListener("DOMContentLoaded", checkAuth);
+  document.addEventListener("DOMContentLoaded", checkAuth) 
+
+  //****************modal************************ */
+document.querySelectorAll('.js_modal').forEach(a => {
+  a.addEventListener('click', openModal)
+})
+
+const openModal = function (e) {
+  e.preventDefault()
+  const target = document.querySelector(e.target.getAttribute('href'))
+  target.style.display = null;
+  target.removeAttribute('aria-hidden')
+}
+
+
+
+
 // Appels des fonctions pour charger les données
 getWorks();
 getCategories();
