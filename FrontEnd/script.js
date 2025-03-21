@@ -82,7 +82,7 @@ function updateFilterStyle(index) {
     const loginLink = document.querySelector('nav ul li a[href="loginpage.html"]');
     const filtersContainer = document.querySelector('.filters');
     const link_modal = document.querySelector('.link_modal');
-  
+    const edition_mode = document.querySelector('.edition_mode');
     if (authToken) {
       // Si l'utilisateur est connecté, changer le bouton en Logout
       loginLink.innerText = "logout";
@@ -106,17 +106,20 @@ function updateFilterStyle(index) {
   }
   document.addEventListener("DOMContentLoaded", checkAuth) 
 
-  //****************modal************************ */
-document.querySelectorAll('.js_modal').forEach(a => {
+   //****************modal************************ */
+   const openModal = function (e) {
+    e.preventDefault()
+    const target = document.querySelector(e.target.getAttribute('href'))
+    target.style.display = null;
+    target.removeAttribute('aria-hidden')
+    console.log ('openmodal')
+  }
+
+   document.querySelectorAll('.js_modal').forEach(a => {
   a.addEventListener('click', openModal)
 })
 
-const openModal = function (e) {
-  e.preventDefault()
-  const target = document.querySelector(e.target.getAttribute('href'))
-  target.style.display = null;
-  target.removeAttribute('aria-hidden')
-}
+
 
 
 
