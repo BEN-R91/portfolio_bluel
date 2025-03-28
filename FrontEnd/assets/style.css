@@ -119,9 +119,11 @@ h2{
 	overflow:auto;
 	background-color: #FFFEF8;
 	width: 630px;
-	max-width: calc(100vw - 5px);
-	max-height: calc(100vh - 5px);
+	
 	height: 688px;
+}
+.modal_gallery {
+	
 }
 
 nav ul {

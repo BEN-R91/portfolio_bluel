@@ -7,6 +7,7 @@ async function getWorks() { //Déclare une fonction asynchrone pour pouvoir util
   allWorks = await response.json(); // Convertit la réponse JSON en un objet JavaScript (ou tableau).Stocke les données dans allWorks pour une utilisation ultérieure.
   console.log("Données des œuvres :", allWorks); //Affiche les données récupérées dans la console pour les vérifier.
   displayGallery(allWorks); // Appelle la fonction displayGallery() pour afficher toutes les œuvres dans la galerie.
+  displayModalWorks(allWorks);
 }
 
 function displayGallery(data) { 
@@ -25,6 +26,25 @@ function displayGallery(data) {
     figure.appendChild(img); //  Ajoute l'image à la balise <figure>.
     figure.appendChild(figcaption); // Ajoute la légende à la balise <figure>.
     gallery.appendChild(figure); // Ajoute le conteneur <figure> complet à la galerie.
+  });
+}
+
+function displayModalWorks(data) {
+  const modalGallery = document.querySelector('.modal_gallery');
+  modalGallery.innerHTML = '';
+
+  data.forEach(work => {
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    img.src = work.imageUrl;
+    img.alt = work.title;
+
+    const figcaption = document.createElement('figcaption');
+    figcaption.textContent = work.title;
+
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+    modalGallery.appendChild(figure);
   });
 }
 
