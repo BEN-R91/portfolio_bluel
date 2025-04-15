@@ -116,14 +116,42 @@ h2{
 }
 
 .modal_wrapper {
-	overflow:auto;
+	border-radius: 10px;
 	background-color: #FFFEF8;
 	width: 630px;
-	
 	height: 688px;
+
 }
+
+.modal_gallery figure img {
+	width: 76.86px;
+	height: 102.57px;
+}
+
 .modal_gallery {
-	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap:10px;
+	padding-left: 70px;
+	padding-right: 70px;
+	padding-bottom: 70px;
+	position: relative;
+}
+
+.modal_gallery figure i {
+	position: absolute;
+}
+
+.h3_modal {
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+h3 {
+	font-size: 26px;
 }
 
 nav ul {

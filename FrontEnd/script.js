@@ -7,44 +7,32 @@ async function getWorks() { //Déclare une fonction asynchrone pour pouvoir util
   allWorks = await response.json(); // Convertit la réponse JSON en un objet JavaScript (ou tableau).Stocke les données dans allWorks pour une utilisation ultérieure.
   console.log("Données des œuvres :", allWorks); //Affiche les données récupérées dans la console pour les vérifier.
   displayGallery(allWorks); // Appelle la fonction displayGallery() pour afficher toutes les œuvres dans la galerie.
-  displayModalWorks(allWorks);
 }
 
 function displayGallery(data) { 
   const gallery = document.querySelector('.gallery'); // Sélectionne l'élément HTML avec la classe .gallery, qui est le conteneur de la galerie.
+  const modalGallery = document.querySelector('.modal_gallery');
   gallery.innerHTML = ''; // Vide la galerie pour éviter d'ajouter les mêmes éléments plusieurs fois.
-
+  modalGallery.innerHTML = '';
+  
   data.forEach(work => { // Parcourt chaque objet (œuvre) du tableau data.
     const figure = document.createElement('figure'); // Crée un élément <figure>, qui sert de conteneur principal pour chaque œuvre.
     const img = document.createElement('img'); // Crée une balise <img> pour afficher l'image de l'œuvre.
     img.src = work.imageUrl; // Définit l'attribut src de l'image avec l'URL fournie par l'API
     img.alt = work.title; // Ajoute un texte alternatif (accessibilité).
-
     const figcaption = document.createElement('figcaption'); // Crée une balise <figcaption> pour afficher le titre de l'œuvre.
     figcaption.textContent = work.title; //  Ajoute le titre comme contenu texte.
-
-    figure.appendChild(img); //  Ajoute l'image à la balise <figure>.
+    figure.appendChild(img); //  Ajoute l'image à la balise <figure>
     figure.appendChild(figcaption); // Ajoute la légende à la balise <figure>.
     gallery.appendChild(figure); // Ajoute le conteneur <figure> complet à la galerie.
-  });
-}
+    
+    const figure_modal = document.createElement('figure');
+    const icon = document.createElement('i');
+    icon.className = "fa-solid fa-trash";
+    figure_modal.appendChild(img.cloneNode());
+    figure_modal.appendChild(icon);
+    modalGallery.appendChild(figure_modal);
 
-function displayModalWorks(data) {
-  const modalGallery = document.querySelector('.modal_gallery');
-  modalGallery.innerHTML = '';
-
-  data.forEach(work => {
-    const figure = document.createElement('figure');
-    const img = document.createElement('img');
-    img.src = work.imageUrl;
-    img.alt = work.title;
-
-    const figcaption = document.createElement('figcaption');
-    figcaption.textContent = work.title;
-
-    figure.appendChild(img);
-    figure.appendChild(figcaption);
-    modalGallery.appendChild(figure);
   });
 }
 
@@ -126,7 +114,7 @@ function updateFilterStyle(index) {
   }
   document.addEventListener("DOMContentLoaded", checkAuth) 
 
-   //****************modal************************ */
+   //****************modal*************************/
    const openModal = function (e) {
     e.preventDefault()
     const target = document.querySelector(e.target.getAttribute('href'))
