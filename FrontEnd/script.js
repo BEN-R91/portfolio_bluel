@@ -29,6 +29,31 @@ function displayGallery(data) {
     const figure_modal = document.createElement('figure');
     const icon = document.createElement('i');
     icon.className = "fa-solid fa-trash";
+    
+    icon.addEventListener('click', () => {
+      console.log(localStorage.getItem("token"));
+      fetch(`http://localhost:5678/api/works/${work.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem("token")}` // Envoie le token pour prouver qu'on est authentifié
+        }
+      })
+      .then(response => {
+        console.log("Status de la réponse :", response.status);
+        if (response.ok) {
+          figure_modal.remove(); 
+          figure.remove();       
+        } 
+        
+        else {
+          console.error(`Erreur de suppression pour l'œuvre ${work.id}`);
+        }
+      })
+      .catch(error => { // Si une erreur réseau ou JS survient (genre plus de connexion, API plantée, etc.)
+        console.error("Erreur réseau :", error);
+      });
+    });
+    
     figure_modal.appendChild(img.cloneNode());
     figure_modal.appendChild(icon);
     modalGallery.appendChild(figure_modal);
