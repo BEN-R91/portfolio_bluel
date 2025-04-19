@@ -31,11 +31,11 @@ function displayGallery(data) {
     icon.className = "fa-solid fa-trash";
     
     icon.addEventListener('click', () => {
-      console.log(localStorage.getItem("token"));
+      console.log(localStorage.getItem("authToken"));
       fetch(`http://localhost:5678/api/works/${work.id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem("token")}` // Envoie le token pour prouver qu'on est authentifié
+          'Authorization': `Bearer ${localStorage.getItem("authToken")}` // Envoie le token pour prouver qu'on est authentifié
         }
       })
       .then(response => {

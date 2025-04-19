@@ -126,6 +126,7 @@ h2{
 .modal_gallery figure img {
 	width: 76.86px;
 	height: 102.57px;
+	position: relative;
 }
 
 .modal_gallery {
@@ -137,7 +138,7 @@ h2{
 	padding-left: 70px;
 	padding-right: 70px;
 	padding-bottom: 70px;
-	position: relative;
+	
 }
 
 .modal_gallery figure i {
