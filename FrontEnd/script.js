@@ -170,6 +170,10 @@ function updateFilterStyle(index) {
   a.addEventListener('click', openModal)
 })
 
+const uploadButton = document.createElement('button');
+  uploadButton.textContent = "Ajouter une photo";
+  uploadButton.classList.add("upload_button");
+  document.querySelector('.upload_button_container').appendChild(uploadButton);
 
 
 

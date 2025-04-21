@@ -167,6 +167,22 @@ h2{
 	
 }
 
+.upload_button_container {
+	display: flex;
+	justify-content: center;
+}
+.upload_button {
+	font-family: 'Syne';
+	width: 237px;
+	height: 36px;
+	color: white;
+	background-color: #1D6154;
+	
+	border-radius: 60px;
+	border: none;
+
+}
+
 h3 {
 	font-size: 26px;
 }
