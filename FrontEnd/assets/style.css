@@ -146,8 +146,25 @@ h2{
 
 .h3_modal {
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 30px;
 	margin-bottom: 50px;
+}
+
+.i_close_modal {
+	background-color: #FFFEF8;  
+}
+
+.js_modal_close {
+	background-color: #FFFEF8;
+	border: #FFFEF8;
+	margin-left: auto;
+}
+
+.close_container {
+	display: flex;
+	margin-top: 30px;
+	margin-right: 30px;
+	
 }
 
 h3 {
