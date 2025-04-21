@@ -140,12 +140,30 @@ function updateFilterStyle(index) {
   document.addEventListener("DOMContentLoaded", checkAuth) 
 
    //****************modal*************************/
+   let modal = null
+
    const openModal = function (e) {
     e.preventDefault()
     const target = document.querySelector(e.target.getAttribute('href'))
     target.style.display = null;
     target.removeAttribute('aria-hidden')
-    console.log ('openmodal')
+    modal = target
+    modal.addEventListener('click', closeModal)
+    modal.querySelector('.js_modal_close') .addEventListener('click', closeModal)
+    modal.querySelector('.js_modal_stop') .addEventListener('click', stopPropagation)
+  }
+
+  const closeModal = function (e) {
+    e.preventDefault()
+    modal.style.display = "none"
+    target.setAttribute('aria-hidden', 'true')
+    modal.removeEventListener('click', closeModal)
+    modal.querySelector('.js_modal_close') .removeEventListener('click', closeModal)
+    modal.querySelector('.js_modal_stop') .removeEventListener('click', stopPropagation)
+    modal = null
+  }
+  const stopPropagation = function (e) {
+    e.stopPropagation()
   }
 
    document.querySelectorAll('.js_modal').forEach(a => {
