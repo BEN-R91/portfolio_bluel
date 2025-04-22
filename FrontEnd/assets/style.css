@@ -172,6 +172,7 @@ h2{
 	display: flex;
 	margin-top: 30px;
 	margin-right: 30px;
+	margin-left: 30px;
 	
 }
 
@@ -189,6 +190,36 @@ h2{
 	border-radius: 60px;
 	border: none;
 
+}
+
+.container_photo_visual {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.photo_visual{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+}
+.add_photo_button {
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	border: none;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	background-color: #cbd6dc;
+	color: #10567a;
+}
+
+.photo_type{
+	font-size: 10px;
 }
 
 h3 {

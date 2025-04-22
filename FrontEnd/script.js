@@ -188,8 +188,15 @@ uploadButton.addEventListener("click", (e) => {
     target.style.display = null;
     target.removeAttribute('aria-hidden');
     modal = target;
+    
   }
 })
+
+//*********creation bouton add_photo************/
+const addPhotoButton = document.createElement('button');
+  addPhotoButton.textContent = "+ Ajouter photo";
+  addPhotoButton.classList.add("add_photo_button");
+  document.querySelector('.add_photo').appendChild(addPhotoButton);
 
 
 
