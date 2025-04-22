@@ -170,10 +170,27 @@ function updateFilterStyle(index) {
   a.addEventListener('click', openModal)
 })
 
+//*********creation bouton upload************//
+
 const uploadButton = document.createElement('button');
   uploadButton.textContent = "Ajouter une photo";
   uploadButton.classList.add("upload_button");
+  uploadButton.setAttribute("data-target", "#modal2");  //******ajout d' un attribut personnalisé data-target qui a pour valeure modal2 (préparation de l' Eventlistener)*******//
   document.querySelector('.upload_button_container').appendChild(uploadButton);
+
+//**************modal2***************/
+
+uploadButton.addEventListener("click", (e) => {
+  const selector = e.target.getAttribute("data-target");
+  const target = document.querySelector(selector);
+
+  if (target) {
+    target.style.display = null;
+    target.removeAttribute('aria-hidden');
+    modal = target;
+  }
+})
+
 
 
 
