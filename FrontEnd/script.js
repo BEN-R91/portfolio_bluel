@@ -28,7 +28,7 @@ function displayGallery(data) {
     
     const figure_modal = document.createElement('figure');
     const icon = document.createElement('i');
-    icon.className = "fa-solid fa-trash";
+    icon.className = "fa-solid fa-trash-can fa-xs";
     
     icon.addEventListener('click', () => {
       console.log(localStorage.getItem("authToken"));
@@ -140,13 +140,13 @@ function updateFilterStyle(index) {
   document.addEventListener("DOMContentLoaded", checkAuth) 
 
    //****************modal*************************/
-   let modal = null
+   let modal = null //**on déclare la modal et on lui donne la valeure null pour pouvoir changer sa valeure et la manipuler ensuite => modal=target*/
 
    const openModal = function (e) {
     e.preventDefault()
     const target = document.querySelector(e.target.getAttribute('href'))
-    target.style.display = null;
-    target.removeAttribute('aria-hidden')
+    target.style.display = null; //******passe l' attribut display de none à null pour afficher la modal (qui existe bel et bien mais n' etait pas visible)***********//
+    target.removeAttribute('aria-hidden') //**********dit aux lecteurs d’écran de ne plus ignorer cet élément ****************//                                                         !! VOIRE AVEC JIMMY SI IL PEUT EN DIRE PLUS !!
     modal = target
     modal.addEventListener('click', closeModal)
     modal.querySelector('.js_modal_close') .addEventListener('click', closeModal)
