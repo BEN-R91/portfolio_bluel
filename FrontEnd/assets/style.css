@@ -168,6 +168,10 @@ h2{
 	z-index: 10;
 }
 
+.back_arrow {
+	cursor: pointer;
+  }
+
 .h3_modal {
 	text-align: center;
 	margin-top: 30px;
@@ -182,6 +186,7 @@ h2{
 	background-color: #FFFEF8;
 	border: #FFFEF8;
 	margin-left: auto;
+	cursor: pointer;
 }
 
 .close_container {
@@ -205,6 +210,7 @@ h2{
 	background-color: #1D6154;
 	border-radius: 60px;
 	border: none;
+	cursor: pointer;
 
 }
 
@@ -240,6 +246,7 @@ h2{
 	margin-bottom: 5px;
 	background-color: #cbd6dc;
 	color: #10567a;
+	cursor: pointer;
 }
 
 .photo_type{
