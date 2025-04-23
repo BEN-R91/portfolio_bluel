@@ -156,7 +156,7 @@ function updateFilterStyle(index) {
   const closeModal = function (e) {
     e.preventDefault()
     modal.style.display = "none"
-    target.setAttribute('aria-hidden', 'true')
+    modal.setAttribute('aria-hidden', 'true')
     modal.removeEventListener('click', closeModal)
     modal.querySelector('.js_modal_close') .removeEventListener('click', closeModal)
     modal.querySelector('.js_modal_stop') .removeEventListener('click', stopPropagation)
@@ -192,15 +192,31 @@ uploadButton.addEventListener("click", (e) => {
   }
 })
 
+const backModal = function (e) {
+  e.preventDefault();
+
+  const modal2 = document.getElementById('modal2');
+  modal2.style.display = 'none';
+  modal2.setAttribute('aria-hidden', 'true');
+
+  const modal1 = document.getElementById('modal');
+  modal1.style.display = null;
+  modal1.removeAttribute('aria-hidden');
+
+  modal = modal1;
+  modal.addEventListener('click', closeModal);
+  modal.querySelector('.js_modal_close').addEventListener('click', closeModal);
+  modal.querySelector('.js_modal_stop').addEventListener('click', stopPropagation);
+}
+
+document.querySelector('.fa-arrow-left').addEventListener('click', backModal);
+
+
 //*********creation bouton add_photo************/
 const addPhotoButton = document.createElement('button');
   addPhotoButton.textContent = "+ Ajouter photo";
   addPhotoButton.classList.add("add_photo_button");
   document.querySelector('.add_photo').appendChild(addPhotoButton);
-
-
-
-
 
 
 // Appels des fonctions pour charger les données
