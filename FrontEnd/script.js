@@ -1,4 +1,3 @@
-// Variables globales
 let allWorks = []; // Tableau pour stocker toutes les données des œuvres récupérées depuis l'API. Il sert de référence pour effectuer les filtrages.
 let filteredWorks = []; // Tableau pour stocker les données filtrées en fonction de la catégorie sélectionnée. Il est utilisé pour afficher une vue spécifique dans la galerie.
 
@@ -143,7 +142,7 @@ function updateFilterStyle(index) {
 let modal = null 
 
 function showModal(target) {
-  
+  // Fermer celle qui était déjà ouverte
   if (modal) {
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
@@ -151,7 +150,7 @@ function showModal(target) {
     modal.querySelector('.js_modal_close').removeEventListener('click', closeModal);
     modal.querySelector('.js_modal_stop').removeEventListener('click', stopPropagation);
   }
-
+  // Ouvrir la nouvelle
   target.style.display = null;
   target.removeAttribute('aria-hidden');
   modal = target;
@@ -168,6 +167,11 @@ const openModal = function (e) {
 
 const closeModal = function (e) {
   e.preventDefault()
+
+  if (modal.contains(document.activeElement)) {
+    document.activeElement.blur();
+  }
+  
   modal.style.display = "none"
   modal.setAttribute('aria-hidden', 'true')
   modal.removeEventListener('click', closeModal)
@@ -179,7 +183,7 @@ const closeModal = function (e) {
 const stopPropagation = function (e) {
   e.stopPropagation()
 }
-
+//Liaison automatique à tous les boutons d’ouverture
 document.querySelectorAll('.js_modal').forEach(a => {
   a.addEventListener('click', openModal)
 })
