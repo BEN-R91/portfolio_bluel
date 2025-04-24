@@ -218,12 +218,12 @@ const addPhotoButton = document.createElement('button');
   document.querySelector('.add_photo').appendChild(addPhotoButton);
 
 //*********formulaire************/
-async function populateCategorySelect() {
+async function CategorySelect() {
   const response = await fetch("http://localhost:5678/api/categories");
   const categories = await response.json();
   const select = document.getElementById('category');
 
-  const emptyOption = document.createElement('option');
+  const emptyOption = document.createElement('option'); ///****rajout champ vide pour clean la selection****///
     emptyOption.value = '';          
     emptyOption.textContent = '';    
     select.appendChild(emptyOption); 
@@ -236,7 +236,14 @@ async function populateCategorySelect() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", populateCategorySelect);
+  document.addEventListener("DOMContentLoaded", CategorySelect);
+
+//*****creation bouton AddConfirmButton*****//
+const AddConfirmButton = document.createElement('button');
+AddConfirmButton.textContent = "Valider";
+AddConfirmButton.classList.add("confirm_button");
+document.querySelector('.container_confirm_button').appendChild(AddConfirmButton)
+
 
 getWorks();
 getCategories();
