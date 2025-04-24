@@ -273,7 +273,7 @@ h2{
 	margin-left: 105px;
 	margin-bottom: 10px;
   }
-  
+
 .container_confirm_button{
 	display: flex;
 	justify-content: center;
@@ -292,6 +292,11 @@ h2{
 
 .photo_type{
 	font-size: 10px;
+}
+
+.img_preview {
+	width: 120px;
+	height: 169px;
 }
 
 h3 {

@@ -168,10 +168,10 @@ const openModal = function (e) {
 const closeModal = function (e) {
   e.preventDefault()
 
-  if (modal.contains(document.activeElement)) {
+  if (modal.contains(document.activeElement)) {    //retire le focus de l’élément actif dans la modale, avant de la cacher pour une meilleur accessibilité.
     document.activeElement.blur();
   }
-  
+
   modal.style.display = "none"
   modal.setAttribute('aria-hidden', 'true')
   modal.removeEventListener('click', closeModal)
@@ -242,12 +242,49 @@ async function CategorySelect() {
 
   document.addEventListener("DOMContentLoaded", CategorySelect);
 
+  //******création d' input et fonctionnement de addPhotoButton******/
+
+const fileInput = document.createElement('input'); //création d' input
+  fileInput.type = "file"; // input de type "file" permettant de sélectionner une image sur son ordi
+  fileInput.accept = "image/png, image/jpeg"; // on limite le type de fichiers que l' utilisateur peu choisir
+  fileInput.style.display = "none"; // on le rend invisible à l'écran, on préfere utiliser le style de addPhotoButton
+  document.body.appendChild(fileInput); // on le planque dans le body
+
+addPhotoButton.addEventListener("click", () => {
+  fileInput.click(); // on lie addPhotoButton à l' input de type file au click
+});
+
+//*******apercu de l' image dans photVisual => FileReader*******/
+
+fileInput.addEventListener("change", () => { //On écoute le changement du champ "file" avec "change"
+  const file = fileInput.files[0]; //On récupère le premier fichier sélectionné d' une liste (files) avec [0] 
+
+  if (file && file.type.startsWith("image/")) { // file && vérifie qu' il y a bien un fichier, file.type vérifie le format du fichier et .startsWith("image/") méthode JS qui vérifie si le type commence par "image/"
+    const reader = new FileReader(); //FileReader, outil JS permettant de lire le contenu de fichiers et le convertit en URL qu' on pourra afficher dans <img>
+
+    reader.onload = function (e) { // On utilise reader.onload comme événement qui déclenchera une fois la lecture de fichier terminée la fonction. 
+      const photoVisual = document.querySelector('.photo_visual'); //On récupere la div 
+
+      photoVisual.innerHTML = ''; //On la vide (icone,texte,bouton)
+
+      const imgPreview = document.createElement('img'); //On crée une balise <img>
+      imgPreview.src = e.target.result; // URL de l'image générée par FileReader
+      imgPreview.alt = "Aperçu de l'image";  
+      imgPreview.classList.add('img_preview'); 
+
+      photoVisual.appendChild(imgPreview); 
+    };
+
+    reader.readAsDataURL(file); // déclenche reader.onload
+  }
+});
+
 //*****creation bouton AddConfirmButton*****//
 const AddConfirmButton = document.createElement('button');
-AddConfirmButton.textContent = "Valider";
-AddConfirmButton.classList.add("confirm_button");
-document.querySelector('.container_confirm_button').appendChild(AddConfirmButton)
+  AddConfirmButton.textContent = "Valider";
+  AddConfirmButton.classList.add("confirm_button");
 
+  document.querySelector('.container_confirm_button').appendChild(AddConfirmButton)
 
 getWorks();
 getCategories();
