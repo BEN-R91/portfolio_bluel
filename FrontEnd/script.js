@@ -140,33 +140,48 @@ function updateFilterStyle(index) {
   document.addEventListener("DOMContentLoaded", checkAuth) 
 
    //****************modal*************************/
-   let modal = null //**on déclare la modal et on lui donne la valeure null pour pouvoir changer sa valeure et la manipuler ensuite => modal=target*/
+let modal = null 
 
-   const openModal = function (e) {
-    e.preventDefault()
-    const target = document.querySelector(e.target.getAttribute('href'))
-    target.style.display = null; //******passe l' attribut display de none à null pour afficher la modal (qui existe bel et bien mais n' etait pas visible)***********//
-    target.removeAttribute('aria-hidden') //**********dit aux lecteurs d’écran de ne plus ignorer cet élément ****************//                                                         !! VOIRE AVEC JIMMY SI IL PEUT EN DIRE PLUS !!
-    modal = target
-    modal.addEventListener('click', closeModal)
-    modal.querySelector('.js_modal_close') .addEventListener('click', closeModal)
-    modal.querySelector('.js_modal_stop') .addEventListener('click', stopPropagation)
+function showModal(target) {
+  // Si une autre modale est déjà ouverte, on la ferme
+  if (modal) {
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.js_modal_close').removeEventListener('click', closeModal);
+    modal.querySelector('.js_modal_stop').removeEventListener('click', stopPropagation);
   }
 
-  const closeModal = function (e) {
-    e.preventDefault()
-    modal.style.display = "none"
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeEventListener('click', closeModal)
-    modal.querySelector('.js_modal_close') .removeEventListener('click', closeModal)
-    modal.querySelector('.js_modal_stop') .removeEventListener('click', stopPropagation)
-    modal = null
-  }
-  const stopPropagation = function (e) {
-    e.stopPropagation()
-  }
+  // Ensuite on ouvre la nouvelle
+  target.style.display = null;
+  target.removeAttribute('aria-hidden');
+  modal = target;
+  modal.addEventListener('click', closeModal);
+  modal.querySelector('.js_modal_close').addEventListener('click', closeModal);
+  modal.querySelector('.js_modal_stop').addEventListener('click', stopPropagation);
+}
 
-   document.querySelectorAll('.js_modal').forEach(a => {
+const openModal = function (e) {
+  e.preventDefault();
+  const target = document.querySelector(e.target.getAttribute('href'));
+  showModal(target);
+}
+
+const closeModal = function (e) {
+  e.preventDefault()
+  modal.style.display = "none"
+  modal.setAttribute('aria-hidden', 'true')
+  modal.removeEventListener('click', closeModal)
+  modal.querySelector('.js_modal_close') .removeEventListener('click', closeModal)
+  modal.querySelector('.js_modal_stop') .removeEventListener('click', stopPropagation)
+  modal = null
+}
+
+const stopPropagation = function (e) {
+  e.stopPropagation()
+}
+
+document.querySelectorAll('.js_modal').forEach(a => {
   a.addEventListener('click', openModal)
 })
 
@@ -183,30 +198,15 @@ const uploadButton = document.createElement('button');
 uploadButton.addEventListener("click", (e) => {
   const selector = e.target.getAttribute("data-target");
   const target = document.querySelector(selector);
-
   if (target) {
-    target.style.display = null;
-    target.removeAttribute('aria-hidden');
-    modal = target;
-    
+    showModal(target);
   }
 })
 
 const backModal = function (e) {
   e.preventDefault();
-
-  const modal2 = document.getElementById('modal2');
-  modal2.style.display = 'none';
-  modal2.setAttribute('aria-hidden', 'true');
-
   const modal1 = document.getElementById('modal');
-  modal1.style.display = null;
-  modal1.removeAttribute('aria-hidden');
-
-  modal = modal1;
-  modal.addEventListener('click', closeModal);
-  modal.querySelector('.js_modal_close').addEventListener('click', closeModal);
-  modal.querySelector('.js_modal_stop').addEventListener('click', stopPropagation);
+  showModal(modal1);
 }
 
 document.querySelector('.fa-arrow-left').addEventListener('click', backModal);
@@ -218,7 +218,26 @@ const addPhotoButton = document.createElement('button');
   addPhotoButton.classList.add("add_photo_button");
   document.querySelector('.add_photo').appendChild(addPhotoButton);
 
+//*********formulaire************/
+async function populateCategorySelect() {
+  const response = await fetch("http://localhost:5678/api/categories");
+  const categories = await response.json();
+  const select = document.getElementById('category');
 
+  const emptyOption = document.createElement('option');
+    emptyOption.value = '';          // Valeur vide
+    emptyOption.textContent = '';    // Texte vide
+    select.appendChild(emptyOption); // Et on l’ajoute avant les autres
+
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat.id;
+    option.textContent = cat.name;
+    select.appendChild(option);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", populateCategorySelect);
 // Appels des fonctions pour charger les données
 getWorks();
 getCategories();

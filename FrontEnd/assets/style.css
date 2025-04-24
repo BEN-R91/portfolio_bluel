@@ -215,7 +215,7 @@ h2{
 }
 
 .modal_separator {
-	width: 70%;
+	width: 68%;
 	height: 1px;
 	background-color: #a1a1a1;
 	border: none;
@@ -248,6 +248,30 @@ h2{
 	color: #10567a;
 	cursor: pointer;
 }
+
+.upload_form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 30px;
+}
+
+.upload_form input,
+.upload_form select {
+  width: 420px;
+  height: 51px;
+  font-size: 1em;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.upload_form label {
+	align-self: flex-start; /* pour forcer l’alignement à gauche dans un flex column */
+	margin-left: 105px;
+	margin-bottom: 10px;
+  }
 
 .photo_type{
 	font-size: 10px;
