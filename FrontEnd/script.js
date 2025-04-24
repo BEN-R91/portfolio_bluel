@@ -143,7 +143,7 @@ function updateFilterStyle(index) {
 let modal = null 
 
 function showModal(target) {
-  // Si une autre modale est déjà ouverte, on la ferme
+  
   if (modal) {
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
@@ -152,7 +152,6 @@ function showModal(target) {
     modal.querySelector('.js_modal_stop').removeEventListener('click', stopPropagation);
   }
 
-  // Ensuite on ouvre la nouvelle
   target.style.display = null;
   target.removeAttribute('aria-hidden');
   modal = target;
@@ -190,7 +189,7 @@ document.querySelectorAll('.js_modal').forEach(a => {
 const uploadButton = document.createElement('button');
   uploadButton.textContent = "Ajouter une photo";
   uploadButton.classList.add("upload_button");
-  uploadButton.setAttribute("data-target", "#modal2");  //******ajout d' un attribut personnalisé data-target qui a pour valeure modal2 (préparation de l' Eventlistener)*******//
+  uploadButton.setAttribute("data-target", "#modal2");
   document.querySelector('.upload_button_container').appendChild(uploadButton);
 
 //**************modal2***************/
@@ -225,9 +224,9 @@ async function populateCategorySelect() {
   const select = document.getElementById('category');
 
   const emptyOption = document.createElement('option');
-    emptyOption.value = '';          // Valeur vide
-    emptyOption.textContent = '';    // Texte vide
-    select.appendChild(emptyOption); // Et on l’ajoute avant les autres
+    emptyOption.value = '';          
+    emptyOption.textContent = '';    
+    select.appendChild(emptyOption); 
 
   categories.forEach(cat => {
     const option = document.createElement('option');
@@ -238,7 +237,7 @@ async function populateCategorySelect() {
 }
 
 document.addEventListener("DOMContentLoaded", populateCategorySelect);
-// Appels des fonctions pour charger les données
+
 getWorks();
 getCategories();
 
