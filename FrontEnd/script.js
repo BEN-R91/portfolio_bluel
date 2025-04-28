@@ -188,15 +188,13 @@ document.querySelectorAll('.js_modal').forEach(a => {
   a.addEventListener('click', openModal)
 })
 
-//*********creation bouton upload************//
+//*********creation bouton upload et ouverture modal2************//
 
 const uploadButton = document.createElement('button');
   uploadButton.textContent = "Ajouter une photo";
   uploadButton.classList.add("upload_button");
   uploadButton.setAttribute("data-target", "#modal2");
   document.querySelector('.upload_button_container').appendChild(uploadButton);
-
-//**************modal2***************/
 
 uploadButton.addEventListener("click", (e) => {
   const selector = e.target.getAttribute("data-target");
@@ -213,13 +211,6 @@ const backModal = function (e) {
 }
 
 document.querySelector('.fa-arrow-left').addEventListener('click', backModal);
-
-
-//*********creation bouton add_photo************/
-const addPhotoButton = document.createElement('button');
-  addPhotoButton.textContent = "+ Ajouter photo";
-  addPhotoButton.classList.add("add_photo_button");
-  document.querySelector('.add_photo').appendChild(addPhotoButton);
 
 //*********formulaire************/
 async function CategorySelect() {
@@ -242,19 +233,9 @@ async function CategorySelect() {
 
   document.addEventListener("DOMContentLoaded", CategorySelect);
 
-  //******création d' input et fonctionnement de addPhotoButton******/
-
-const fileInput = document.createElement('input'); //création d' input
-  fileInput.type = "file"; // input de type "file" permettant de sélectionner une image sur son ordi
-  fileInput.accept = "image/png, image/jpeg"; // on limite le type de fichiers que l' utilisateur peu choisir
-  fileInput.style.display = "none"; // on le rend invisible à l'écran, on préfere utiliser le style de addPhotoButton
-  document.body.appendChild(fileInput); // on le planque dans le body
-
-addPhotoButton.addEventListener("click", () => {
-  fileInput.click(); // on lie addPhotoButton à l' input de type file au click
-});
-
 //*******apercu de l' image dans photVisual => FileReader*******/
+
+const fileInput = document.getElementById('image');
 
 fileInput.addEventListener("change", () => { //On écoute le changement du champ "file" avec "change"
   const file = fileInput.files[0]; //On récupère le premier fichier sélectionné d' une liste (files) avec [0] 
@@ -278,13 +259,6 @@ fileInput.addEventListener("change", () => { //On écoute le changement du champ
     reader.readAsDataURL(file); // déclenche reader.onload
   }
 });
-
-//*****creation bouton AddConfirmButton*****//
-const AddConfirmButton = document.createElement('button');
-  AddConfirmButton.textContent = "Valider";
-  AddConfirmButton.classList.add("confirm_button");
-
-  document.querySelector('.container_confirm_button').appendChild(AddConfirmButton)
 
 getWorks();
 getCategories();

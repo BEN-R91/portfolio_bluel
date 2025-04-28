@@ -227,6 +227,7 @@ h2{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 20px;
 }
 
 .photo_visual{
@@ -238,11 +239,19 @@ h2{
 	height: 169px;
 	background-color: #E8F1F6;
 }
+
+.add_photo{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .add_photo_button {
 	width: 173px;
 	height: 36px;
+	line-height: 36px;
 	border-radius: 50px;
 	border: none;
+	text-align: center;
 	margin-top: 10px;
 	margin-bottom: 5px;
 	background-color: #cbd6dc;
@@ -268,7 +277,7 @@ h2{
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-.upload_form label {
+.upload_form label:not(.add_photo_button) {
 	align-self: flex-start;
 	margin-left: 105px;
 	margin-bottom: 10px;
