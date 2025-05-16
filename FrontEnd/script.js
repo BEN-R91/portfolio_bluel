@@ -259,6 +259,59 @@ fileInput.addEventListener("change", () => { //On écoute le changement du champ
     reader.readAsDataURL(file); // déclenche reader.onload
   }
 });
+//***************************formData */
+document.querySelector(".upload_form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Récupération de l'image
+    const imageInput = document.getElementById("image");
+    const imageFile = imageInput.files[0];
+
+    if (!imageFile) {
+        alert("Veuillez sélectionner une image.");
+        return;
+    }
+
+    // Vérification de la taille de l'image (4 Mo max)
+    if (imageFile.size > 4 * 1024 * 1024) {
+        alert("L'image dépasse la taille maximale de 4 Mo.");
+        return;
+    }
+
+    formData.append("image", imageFile);
+
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
+            },
+            body: formData,
+        });
+
+        if (response.ok) {
+            alert("Image ajoutée avec succès !");
+            form.reset();
+            document.querySelector(".photo_visual").innerHTML = `
+                <i class="fa-solid fa-image fa-5x" style="color: #cbd6dc;"></i>
+                <div class="add_photo">
+                    <label for="image" class="add_photo_button">+ Ajouter photo</label>
+                    <input type="file" id="image" name="image" accept="image/png, image/jpeg" required style="display: none;">
+                </div>
+                <p class="photo_type">jpg, png : 4mo max</p>
+            `;
+            await getWorks();
+        } else {
+            alert("Erreur lors de l'ajout de l'image.");
+        }
+    } catch (error) {
+        console.error("Erreur réseau :", error);
+        alert("Erreur de réseau, vérifiez votre connexion.");
+    }
+});
 
 getWorks();
 getCategories();
