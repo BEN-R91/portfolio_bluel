@@ -262,11 +262,10 @@ fileInput.addEventListener("change", () => { //On écoute le changement du champ
 //***************************formData */
 document.querySelector(".upload_form").addEventListener("submit", async (e) => {
     e.preventDefault();
-    
-    const form = e.target;
-    const formData = new FormData(form);
 
-    // Récupération de l'image
+    const form = document.getElementById("upload_form");
+
+    // ✅ Récupération de l'image (sécurité côté client)
     const imageInput = document.getElementById("image");
     const imageFile = imageInput.files[0];
 
@@ -275,14 +274,25 @@ document.querySelector(".upload_form").addEventListener("submit", async (e) => {
         return;
     }
 
-    // Vérification de la taille de l'image (4 Mo max)
     if (imageFile.size > 4 * 1024 * 1024) {
         alert("L'image dépasse la taille maximale de 4 Mo.");
         return;
     }
 
+    // ✅ Création manuelle du FormData avec les bons types
+    const formData = new FormData();
     formData.append("image", imageFile);
+    formData.append("title", document.getElementById("title").value.trim());
+    formData.append("category", parseInt(document.getElementById("category").value));
 
+    // ✅ Log des données envoyées
+    console.log("Token envoyé :", localStorage.getItem("authToken"));
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+        console.log(`${key} (typeof):`, typeof value);
+    }
+
+    // ✅ Envoi au backend
     try {
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
@@ -292,6 +302,9 @@ document.querySelector(".upload_form").addEventListener("submit", async (e) => {
             body: formData,
         });
 
+        const responseText = await response.text();
+        console.log("Réponse brute du backend :", responseText);
+
         if (response.ok) {
             alert("Image ajoutée avec succès !");
             form.reset();
@@ -299,7 +312,6 @@ document.querySelector(".upload_form").addEventListener("submit", async (e) => {
                 <i class="fa-solid fa-image fa-5x" style="color: #cbd6dc;"></i>
                 <div class="add_photo">
                     <label for="image" class="add_photo_button">+ Ajouter photo</label>
-                    <input type="file" id="image" name="image" accept="image/png, image/jpeg" required style="display: none;">
                 </div>
                 <p class="photo_type">jpg, png : 4mo max</p>
             `;
@@ -315,5 +327,3 @@ document.querySelector(".upload_form").addEventListener("submit", async (e) => {
 
 getWorks();
 getCategories();
-
- 

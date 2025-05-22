@@ -96,17 +96,17 @@
               <div class="h3_modal">
                 <h3>Ajout photo</h3>
               </div>
-              <form class="upload_form">
+              <form class="upload_form" id="upload_form" enctype="multipart/form-data">
                 <div class="container_photo_visual">
                   <div class="photo_visual">
                     <i class="fa-solid fa-image fa-5x" style="color: #cbd6dc;"></i>
                     <div class="add_photo">
                       <label for="image" class="add_photo_button">+ Ajouter photo</label>
-                      <input type="file" id="image" name="image" accept="image/png, image/jpeg" required style="display: none;">
                     </div>
                     <p class="photo_type">jpg, png : 4mo max</p>
                   </div>
                 </div>
+                <input type="file" id="image" name="image" accept="image/png, image/jpeg" required style="display: none;">
                 
                 <label for="title">Titre</label>
                 <input type="text" id="title" name="title" required>
