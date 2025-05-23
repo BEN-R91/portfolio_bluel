@@ -218,7 +218,7 @@ async function CategorySelect() {
   const categories = await response.json();
   const select = document.getElementById('category');
 
-  const emptyOption = document.createElement('option'); ///****rajout champ vide pour clean la selection****///
+  const emptyOption = document.createElement('option'); //rajout champ vide pour clean la selection
     emptyOption.value = '';          
     emptyOption.textContent = '';    
     select.appendChild(emptyOption); 
@@ -259,13 +259,13 @@ fileInput.addEventListener("change", () => { //On écoute le changement du champ
     reader.readAsDataURL(file); // déclenche reader.onload
   }
 });
-//***************************formData */
+//*************************** formData ****************************//
 document.querySelector(".upload_form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const form = document.getElementById("upload_form");
 
-    // ✅ Récupération de l'image (sécurité côté client)
+    // Récupération de l'image (sécurité côté client)
     const imageInput = document.getElementById("image");
     const imageFile = imageInput.files[0];
 
@@ -279,20 +279,20 @@ document.querySelector(".upload_form").addEventListener("submit", async (e) => {
         return;
     }
 
-    // ✅ Création manuelle du FormData avec les bons types
+    // Création manuelle du FormData avec les bons types // Debug erreur 500
     const formData = new FormData();
     formData.append("image", imageFile);
     formData.append("title", document.getElementById("title").value.trim());
-    formData.append("category", parseInt(document.getElementById("category").value));
+    formData.append("category", parseInt(document.getElementById("category").value)); // categoryId <> category // Debug erreur 400
 
-    // ✅ Log des données envoyées
+    // Log des données envoyées
     console.log("Token envoyé :", localStorage.getItem("authToken"));
     for (let [key, value] of formData.entries()) {
         console.log(`${key}:`, value);
         console.log(`${key} (typeof):`, typeof value);
     }
 
-    // ✅ Envoi au backend
+    // Envoi au backend
     try {
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
@@ -324,6 +324,31 @@ document.querySelector(".upload_form").addEventListener("submit", async (e) => {
         alert("Erreur de réseau, vérifiez votre connexion.");
     }
 });
+
+//**************confirm_button--active***************//
+
+const imageInput = document.getElementById("image");
+const titleInput = document.getElementById("title");
+const categorySelect = document.getElementById("category");
+const submitButton = document.querySelector(".confirm_button");
+
+const activeClass = "confirm_buton--active";
+
+function checkFormValidity() {
+  const imageIsValid = imageInput.files.length > 0;
+  const titleIsValid = titleInput.value.trim() !== "";
+  const categoryIsValid = categorySelect.value !== "";
+
+  if (imageIsValid && titleIsValid && categoryIsValid) {
+    submitButton.classList.add(activeClass);
+  } else {
+    submitButton.classList.remove(activeClass);
+  }
+}
+
+imageInput.addEventListener("change", checkFormValidity);
+titleInput.addEventListener("input", checkFormValidity);
+categorySelect.addEventListener("change", checkFormValidity);
 
 getWorks();
 getCategories();
