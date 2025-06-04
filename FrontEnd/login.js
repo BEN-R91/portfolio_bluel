@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
   
         const data = await response.json();
-        console.log("Réponse serveur complète :", data);//*******************************probleme de route */
         if (response.ok) {
           localStorage.setItem("authToken", data.token);  // 
           window.location.href = "index.html"; 
