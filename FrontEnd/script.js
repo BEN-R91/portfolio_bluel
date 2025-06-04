@@ -332,7 +332,7 @@ const titleInput = document.getElementById("title");
 const categorySelect = document.getElementById("category");
 const submitButton = document.querySelector(".confirm_button");
 
-const activeClass = "confirm_buton--active";
+const activeClass = "confirm_button--active";
 
 function checkFormValidity() {
   const imageIsValid = imageInput.files.length > 0;
