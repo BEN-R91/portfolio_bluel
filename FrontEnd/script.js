@@ -1,28 +1,28 @@
-let allWorks = []; // Tableau pour stocker toutes les données des œuvres récupérées depuis l'API. Il sert de référence pour effectuer les filtrages.
-let filteredWorks = []; // Tableau pour stocker les données filtrées en fonction de la catégorie sélectionnée. Il est utilisé pour afficher une vue spécifique dans la galerie.
+let allWorks = [];
+let filteredWorks = []; 
 
-async function getWorks() { //Déclare une fonction asynchrone pour pouvoir utiliser await.
-  const response = await fetch("http://localhost:5678/api/works"); // Envoie une requête HTTP à l'URL spécifiée (http://localhost:5678/api/works) pour récupérer les données des œuvres. await attend la réponse de l'API avant de continuer.
-  allWorks = await response.json(); // Convertit la réponse JSON en un objet JavaScript (ou tableau).Stocke les données dans allWorks pour une utilisation ultérieure.
-  displayGallery(allWorks); // Appelle la fonction displayGallery() pour afficher toutes les œuvres dans la galerie.
+async function getWorks() { 
+  const response = await fetch("http://localhost:5678/api/works"); 
+  allWorks = await response.json(); 
+  displayGallery(allWorks); 
 }
 
 function displayGallery(data) { 
-  const gallery = document.querySelector('.gallery'); // Sélectionne l'élément HTML avec la classe .gallery, qui est le conteneur de la galerie.
+  const gallery = document.querySelector('.gallery'); 
   const modalGallery = document.querySelector('.modal_gallery');
-  gallery.innerHTML = ''; // Vide la galerie pour éviter d'ajouter les mêmes éléments plusieurs fois.
+  gallery.innerHTML = ''; 
   modalGallery.innerHTML = '';
   
-  data.forEach(work => { // Parcourt chaque objet (œuvre) du tableau data.
-    const figure = document.createElement('figure'); // Crée un élément <figure>, qui sert de conteneur principal pour chaque œuvre.
-    const img = document.createElement('img'); // Crée une balise <img> pour afficher l'image de l'œuvre.
-    img.src = work.imageUrl; // Définit l'attribut src de l'image avec l'URL fournie par l'API
-    img.alt = work.title; // Ajoute un texte alternatif (accessibilité).
-    const figcaption = document.createElement('figcaption'); // Crée une balise <figcaption> pour afficher le titre de l'œuvre.
-    figcaption.textContent = work.title; //  Ajoute le titre comme contenu texte.
-    figure.appendChild(img); //  Ajoute l'image à la balise <figure>
-    figure.appendChild(figcaption); // Ajoute la légende à la balise <figure>.
-    gallery.appendChild(figure); // Ajoute le conteneur <figure> complet à la galerie.
+  data.forEach(work => { 
+    const figure = document.createElement('figure'); 
+    const img = document.createElement('img'); 
+    img.src = work.imageUrl; 
+    img.alt = work.title; 
+    const figcaption = document.createElement('figcaption'); 
+    figcaption.textContent = work.title; 
+    figure.appendChild(img); 
+    figure.appendChild(figcaption); 
+    gallery.appendChild(figure); 
     
     const figure_modal = document.createElement('figure');
     const icon = document.createElement('i');
@@ -32,7 +32,7 @@ function displayGallery(data) {
       fetch(`http://localhost:5678/api/works/${work.id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem("authToken")}` // Envoie le token pour prouver qu'on est authentifié
+          'Authorization': `Bearer ${localStorage.getItem("authToken")}` 
         }
       })
       .then(response => {
@@ -45,7 +45,7 @@ function displayGallery(data) {
           console.error(`Erreur de suppression pour l'œuvre ${work.id}`);
         }
       })
-      .catch(error => { // Si une erreur réseau ou JS survient (genre plus de connexion, API plantée, etc.)
+      .catch(error => { 
         console.error("Erreur réseau :", error);
       });
     });
@@ -57,47 +57,47 @@ function displayGallery(data) {
   });
 }
 
-async function getCategories() { // Similaire à getWorks(), elle récupère les catégories depuis l'API.
+async function getCategories() { 
   const response = await fetch("http://localhost:5678/api/categories");
-  const data = await response.json(); // Les données des catégories sont converties en objet JavaScript avec response.json().
-  displayCategories(data); // Appelle la fonction pour créer dynamiquement les boutons de filtrage.
+  const data = await response.json(); 
+  displayCategories(data); 
 }
 
 function displayCategories(categories) {
-  const filtersContainer = document.querySelector('.filters'); // Sélectionne l'élément HTML avec la classe .filters qui est le conteneur de mes boutons.
+  const filtersContainer = document.querySelector('.filters'); 
   
-  // Bouton pour afficher toutes les œuvres
-  const allButton = document.createElement('button'); // Créé le bouton "Tous".
-  allButton.textContent = "Tous"; // Texte du bouton.
+  
+  const allButton = document.createElement('button');
+  allButton.textContent = "Tous";
   allButton.className =  "filterbutton"
   filtersContainer.appendChild(allButton); 
 
-  allButton.addEventListener('click', () => { // Ajoute un eventListener pour réinitialiser filteredWorks avec toutes les œuvres et mettre à jour la galerie.
-    filteredWorks = allWorks; // Réinitialise les données filtrées à toutes les œuvres
-    displayGallery(filteredWorks); // Met à jour la galerie
+  allButton.addEventListener('click', () => { 
+    filteredWorks = allWorks; 
+    displayGallery(filteredWorks); 
     updateFilterStyle(0)
   });
 
   // Boutons pour chaque catégorie
   categories.forEach((category, index) => {
     const button = document.createElement('button');
-    button.textContent = category.name; // Tetxte des boutons selon les catégories (category.name).
+    button.textContent = category.name; 
     button.className =  "filterbutton"
     filtersContainer.appendChild(button);
 
   // Filtrer les données en fonction de la catégorie sélectionnée
     button.addEventListener('click', () => { 
-      filteredWorks = allWorks.filter(work => work.categoryId === category.id); // filter() : Crée un nouveau tableau avec les œuvres dont categoryId correspond à l'ID de la catégorie.
-      displayGallery(filteredWorks); // Appelle displayGallery(filteredWorks) pour afficher uniquement les œuvres filtrées.
+      filteredWorks = allWorks.filter(work => work.categoryId === category.id); 
+      displayGallery(filteredWorks); 
       updateFilterStyle(index+1); 
     });
   });
 }
 
 function updateFilterStyle(index) {
-  const buttons = document.querySelectorAll('.filterbutton'); //On selectionne tout les éléments avec la classe 'button' avec 'querySelectorAll
-  buttons.forEach((button, i) => { //parcour tout les buttons
-      if (i === index) { // condition pour appliquer 'button selected' 
+  const buttons = document.querySelectorAll('.filterbutton'); 
+  buttons.forEach((button, i) => { 
+      if (i === index) { 
           button.classList.add('filterbutton_selected');
       } else {
           button.classList.remove('filterbutton_selected');
@@ -114,7 +114,7 @@ function updateFilterStyle(index) {
     if (authToken) {
       // Si l'utilisateur est connecté, changer le bouton en Logout
       loginLink.innerText = "logout";
-      loginLink.href = "#"; // On empêche la redirection vers la page de login
+      loginLink.href = "#"; 
       loginLink.addEventListener("click", logout);
   
       // Masquer les catégories si elles existent
