@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
         password: passwordInput.value,
       };
   
-     try  { //******************utilistation de try */
+     try  { 
         const response = await fetch("http://localhost:5678/api/users/login", { 
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(userData),  //************************convertir en JSON avant l' envoie au serv */
+          body: JSON.stringify(userData), 
         });
   
         const data = await response.json();
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           errorMessage.textContent = "Identifiants incorrects !";
           errorMessage.style.display = "block"; 
         }
-      } catch (error) { // ********************************************d' ou try 
+      } catch (error) { 
         console.error("Erreur lors de la connexion :", error);
         errorMessage.textContent = "Problème de connexion au serveur.";
         errorMessage.style.display = "block";
