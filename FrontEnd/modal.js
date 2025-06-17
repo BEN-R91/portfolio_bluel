@@ -97,29 +97,29 @@ async function CategorySelect() {
 
 const fileInput = document.getElementById('image');
 
-fileInput.addEventListener("change", () => { //On écoute le changement du champ "file" avec "change"
-  const file = fileInput.files[0]; //On récupère le premier fichier sélectionné d' une liste (files) avec [0] 
+fileInput.addEventListener("change", () => { 
+  const file = fileInput.files[0]; 
 
-  if (file && file.type.startsWith("image/")) { // file && vérifie qu' il y a bien un fichier, file.type vérifie le format du fichier et .startsWith("image/") méthode JS qui vérifie si le type commence par "image/"
-    const reader = new FileReader(); //FileReader, outil JS permettant de lire le contenu de fichiers et le convertit en URL qu' on pourra afficher dans <img>
+  if (file && file.type.startsWith("image/")) { 
+    const reader = new FileReader();
 
-    reader.onload = function (e) { // On utilise reader.onload comme événement qui déclenchera une fois la lecture de fichier terminée la fonction. 
-      const photoVisual = document.querySelector('.photo_visual'); //On récupere la div 
+    reader.onload = function (e) {  
+      const photoVisual = document.querySelector('.photo_visual');  
 
-      photoVisual.innerHTML = ''; //On la vide (icone,texte,bouton)
+      photoVisual.innerHTML = ''; 
 
-      const imgPreview = document.createElement('img'); //On crée une balise <img>
-      imgPreview.src = e.target.result; // URL de l'image générée par FileReader
+      const imgPreview = document.createElement('img'); 
+      imgPreview.src = e.target.result; 
       imgPreview.alt = "Aperçu de l'image";  
       imgPreview.classList.add('img_preview'); 
 
       photoVisual.appendChild(imgPreview); 
     };
 
-    reader.readAsDataURL(file); // déclenche reader.onload
+    reader.readAsDataURL(file); 
   }
 });
-//*************************** formData ****************************//
+//*************************** formData ****************************/
 document.querySelector(".upload_form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -139,11 +139,10 @@ document.querySelector(".upload_form").addEventListener("submit", async (e) => {
         return;
     }
 
-    // Création manuelle du FormData avec les bons types // Debug erreur 500
     const formData = new FormData();
     formData.append("image", imageFile);
     formData.append("title", document.getElementById("title").value.trim());
-    formData.append("category", parseInt(document.getElementById("category").value)); // categoryId <> category // Debug erreur 400
+    formData.append("category", parseInt(document.getElementById("category").value)); 
 
     // Envoi au backend
     try {
