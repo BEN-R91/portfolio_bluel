@@ -1,4 +1,4 @@
-const reponse = await fetch("http://localhost:5678/api/works");
+/*const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 console.log(works);
 
@@ -15,7 +15,18 @@ console.log(works);
 */
 
 const getWorks = async () => {
-    // 1.
+    
+    try {
+        const response = await fetch('http://localhost:5678/api/works');
+        const worksData = await response.json();
+        console.log("Récupération des travaux terminée", worksData)
+        return worksData;
+    }
+
+    catch (error) { /*revoir role du catch (error)*/
+        console.error("Erreur lors de la récupération des travaux", error); /*role du "error" apres la virgule*/
+        return []; /*pourquoi retourner un tableau vide est essentiel*/
+    }
 }
 
 const createFigure = () => {
@@ -25,3 +36,5 @@ const createFigure = () => {
 const insertInContainer = () => {
     // 3.
 }
+
+getWorks(); /*appeler la fonction !!!!*/
