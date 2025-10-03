@@ -13,40 +13,46 @@ console.log(works);
 3.1 Boucler (faire une boucle au sens JS) sur le tableau récupéré en 1. pour construire les figures avec la fonction 2.
 3.2 Insérer chaque figure dans le container approprié (<div class="gallery"></div>)
 */
-
-const getWorks = async () => {
+                                                                       //Récupération des données
+const getWorks = async () => {              
     
     try {
-        const response = await fetch('http://localhost:5678/api/works'); //pourquoi ' et plus "//
+        const response = await fetch('http://localhost:5678/api/works');
         const worksData = await response.json();
         console.log("Récupération des travaux terminée", worksData)
         return worksData;
     }
 
-    catch (error) { /*revoir role du catch (error)*/
-        console.error("Erreur lors de la récupération des travaux", error); //role du "error" apres la virgule//
+    catch (error) { 
+        console.error("Erreur lors de la récupération des travaux", error);
         return []; /*pourquoi retourner un tableau vide est essentiel*/
     }
 }
+                                                                      //Création des éléments pour chaque donnée
+const createFigure = (work) => {
+    const figureElement = document.createElement('figure'); 
+    const imageElement = document.createElement('img'); 
+    imageElement.src = work.imageUrl; 
+    imageElement.alt = work.title; 
 
-const createFigure = (work) => { /*WORK ??????*/
-    
-    const figureElement = document.createElement('figure'); //création de l' élément "figure" (conteneur parent)//
-    const imageElement = document.createElement('img'); //création de l' élément "img"//
-    imageElement.src = work.imageUrl; //Récupère l' URL (src)
-    imageElement.alt = work.title; //Récupère le tire (alt)
-
-    const captionElement = document.createElement('figcaption'); //création de l'élément "figcaption"
-    captionElement.innerText = work.title; //ajout du texte de la légende
+    const captionElement = document.createElement('figcaption'); 
+    captionElement.innerText = work.title;
 
     figureElement.appendChild(imageElement); //ASSEMBLAGE : on place <img> et <figcaption> dans <figure>
     figureElement.appendChild(captionElement);
 
-    return figureElement; //ON RETOURNE l' élément <figure> complet
-}                                                                              //Pour creatFigure REVISER FONCTIONNEMENT ET WORK + RAJOUT log pour verif fonctionnement si possible
+    return figureElement; //on retourne l' élément <figure> complet
+}                                                                      //On "coordonne" getWorks et creatFigure et on les insert dans le DOM (<div class="gallery"></div>)
 
-const insertInContainer = () => {
-    // 3.
+const insertInContainer = async () => {
+    const worksData = await getWorks(); //On attend que getWorks soit terminé
+    const galleryContainer = document.querySelector('.gallery'); //On cible .gallery
+
+    worksData.forEach (work => {
+        const workFigure = createFigure(work);
+        galleryContainer.appendChild(workFigure);
+    })
 }
 
 getWorks(); /*appeler la fonction !!!!*/
+insertInContainer();
