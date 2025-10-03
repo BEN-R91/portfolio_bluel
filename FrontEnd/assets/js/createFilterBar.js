@@ -15,6 +15,9 @@ const getCategoryId = async () => {
     }
 }
                                                                             //Création de la barre de nav (.filtres) et des boutons selon les cat récupérées
+
 const createFilterBar = async () => {
     const categoryID = await getCategoryId();
 }
+
+getCategoryId();
