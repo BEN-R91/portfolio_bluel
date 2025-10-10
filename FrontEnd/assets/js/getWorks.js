@@ -14,6 +14,7 @@ console.log(works);
 3.2 Insérer chaque figure dans le container approprié (<div class="gallery"></div>)
 */
 
+export const works = [];
 
 /**
  * Récupération des données.
@@ -58,7 +59,7 @@ const getWorks = async () => {
  * 
  * @returns {HTMLElement} Retourne la <figure> créée pour le projet
  */
-const createFigure = (work) => {
+export const createFigure = (work) => {
     const figureElement = document.createElement('figure'); 
     
     const imageElement = document.createElement('img'); 
@@ -73,13 +74,15 @@ const createFigure = (work) => {
 
     return figureElement; //on retourne l' élément <figure> complet
 }                                                                      
-                                                                      //On "coordonne" getWorks et creatFigure et on les insert dans le DOM (<div class="gallery"></div>)
 
+/**
+ * On "coordonne" getWorks et creatFigure et on les insert dans le DOM (<div class="gallery"></div>)
+ */
 const insertInContainer = async () => {
-    const worksData = await getWorks(); //On attend que getWorks soit terminé
+    const works = await getWorks(); //On attend que getWorks soit terminé
     const galleryContainer = document.querySelector('.gallery'); //On cible .gallery
 
-    worksData.forEach((work) => {
+    works.forEach((work) => {
         const workFigure = createFigure(work);
         galleryContainer.appendChild(workFigure);
         // galleryContainer.appendChild(createFigure(work)); <= à privilégier pour éviter de créer une variable
