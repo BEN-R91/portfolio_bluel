@@ -14,15 +14,10 @@ console.log(works);
 3.2 Insérer chaque figure dans le container approprié (<div class="gallery"></div>)
 */
 
-export const works = [];
+export let works = [];
 
 /**
  * Récupération des données.
- * 
- * @typedef Category
- * @type {object}
- * @property {number} id - Identifiant de la catégorie
- * @property {string} name - Nom de la catégory
  * 
  * @typedef Work
  * @type {object}
@@ -32,20 +27,16 @@ export const works = [];
  * @property {number} categoryId - Identifiant de la catégorie associée
  * @property {number} userId - Identifiant de l'auteur
  * @property {Category} category - Catégorie associée
- * 
- * @returns {Promise<Work[]>}
  */
 const getWorks = async () => {              
     try {
         const response = await fetch('http://localhost:5678/api/works');
-        const worksData = await response.json();
-        console.log("Récupération des travaux terminée", worksData)
+        works = await response.json();
+        console.log("Récupération des travaux terminée", works)
 
         /*if (!response.ok) { <= le "!" indique le contraire de la condition à côté, si ok = true, alors !ok = false
            // Alors j'affiche à l'utilisateur que le chargement a eu un souci. 
         }*/
-
-        return worksData;
     } catch (error) { 
         console.error("Erreur lors de la récupération des travaux", error);
         return [];
@@ -79,7 +70,7 @@ export const createFigure = (work) => {
  * On "coordonne" getWorks et creatFigure et on les insert dans le DOM (<div class="gallery"></div>)
  */
 const insertInContainer = async () => {
-    const works = await getWorks(); //On attend que getWorks soit terminé
+    await getWorks(); //On attend que getWorks soit terminé
     const galleryContainer = document.querySelector('.gallery'); //On cible .gallery
 
     works.forEach((work) => {
