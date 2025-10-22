@@ -64,7 +64,8 @@ const createFilterBar = async () => {
     const createButton = ({name, id}) => {  //************************************(décomposition d'objet) */
         const button = document.createElement('button');
         button.textContent = name;
-        button.classList.add('filter-btn');
+        button.classList.add('core-btn');
+        button.classList.add('filter-btn-outlined');
         
         button.addEventListener('click', () => {
             const currentActive = filtersContainer.querySelector('.filter-btn-active');

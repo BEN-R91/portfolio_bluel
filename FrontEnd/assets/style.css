@@ -3,6 +3,10 @@
    License: none (public domain)
 */
 
+:root {
+	--primary-color: #1D6154;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -82,7 +86,7 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--primary-color);
 }
 
 a {
@@ -156,27 +160,32 @@ li:hover {
 
 }
 
-.filter-btn {
+.core-btn {
 	font-family: 'Syne';
 	font-weight: 700;
-	color: #1D6154;
-	background-color: white;
 	text-align: center;
-	border-radius: 60px ;
-	border: 1px solid;
-	border-color: #1D6154;
+	border-radius: 60px;
+	border: 1px solid var(--primary-color);
+	cursor: pointer;
 	padding: 5px 15px;
+	background-color: transparent;
+	color: var(--primary-color);
+}
+
+.filter-btn-outlined {
+	border: 1px solid var(--primary-color);
 	margin-bottom: 30px;
 }
 
 .filter-btn-active {
+	border: none;
 	color: white;
-	background-color: #1D6154;
+	background-color: var(--primary-color);
 }
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -206,15 +215,9 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
+button[type="submit"]{
 	margin : 2em auto ;
 	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
 }
 
 footer nav ul {
