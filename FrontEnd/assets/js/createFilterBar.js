@@ -66,7 +66,12 @@ const createFilterBar = async () => {
         button.textContent = name;
         button.classList.add('filter-btn');
         
-        button.addEventListener('click', () => { 
+        button.addEventListener('click', () => {
+            const currentActive = filtersContainer.querySelector('.filter-btn-active');
+            if (currentActive) {
+                currentActive.classList.remove('filter-btn-active'); // pour retirer la class active 
+            }
+            button.classList.add('filter-btn-active'); // pour l' ajouter
             //TERNAIRE (if/else en court)
             let filteredWorks = (id === 0) //condition qui verifie si l' id passé à la fonction = 0 (0=Tous)
             ? works //si la condition est VRAIE (pour bouton Tous), filteredWorks reçoit tout le tableau (works => dataset)
