@@ -57,11 +57,28 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+.mdi {
+	color: white;
+}
+
+.edit-mode-banner {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
 }
@@ -83,6 +100,7 @@ h1 > span {
 }
 
 h2{
+	display: flex;
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;

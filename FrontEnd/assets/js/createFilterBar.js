@@ -1,6 +1,7 @@
 /** */
 
 import { works, createFigure } from './getWorks';                                      
+import { isLogged } from './edit-mode';                                      
 
 /**
 * On récupere l' ID des différentes cat
@@ -91,7 +92,10 @@ const createFilterBar = async () => {
     categories.forEach(createButton);
 }
 
-getCategories();
+if (!isLogged) {
+    getCategories();
 
-createFiltersContainer();
-createFilterBar();
+    createFiltersContainer();
+    createFilterBar();
+}
+
