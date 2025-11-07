@@ -59,7 +59,7 @@ body {
 }
 
 .mdi {
-	color: white;
+	margin-right: 8px;
 }
 
 .edit-mode-banner {
@@ -70,7 +70,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 }
 
 header {
@@ -96,20 +95,34 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+}
+
+.title-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
 }
 
 h2{
 	display: flex;
+	justify-content: center;
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: var(--primary-color);
 }
 
+.edit-button {
+	display: none;
+	background: none;
+    border: none;
+	cursor: pointer;
+	margin-bottom: 25px;
+}
+
 a {
 	text-decoration: none;
-
 }
 
 a:visited {

@@ -14,6 +14,7 @@
 	<script src="assets/js/edit-mode.js" type="module"></script>
 	<script src="assets/js/getWorks.js" type="module"></script>
 	<script src="assets/js/createFilterBar.js" type="module"></script>
+	<script src="assets/js/openModal.js" type="module"></script>
 </head>
 <body>
 	<div class="edit-mode-banner" style="display:none">
@@ -44,7 +45,14 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="title-container">
+				<h2>Mes Projets</h2>
+				<button class="edit-button"><i class="mdi mdi-square-edit-outline"></i>Modifier</button>
+			</div>
+			<dialog class="editModal">
+  				<p>Salut beau gosse 👋, ceci est ta modale !</p>
+  				<button id="closeModal">Fermer</button>
+			</dialog>
 			<div class="gallery"></div>
 		</section>
 		<section id="contact">
