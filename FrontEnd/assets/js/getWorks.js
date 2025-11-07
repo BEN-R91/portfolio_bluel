@@ -50,7 +50,7 @@ const getWorks = async () => {
  * 
  * @returns {HTMLElement} Retourne la <figure> créée pour le projet
  */
-export const createFigure = (work) => {
+export const createFigure = (work, isModal = false) => {
     const figureElement = document.createElement('figure'); 
     
     const imageElement = document.createElement('img'); 
@@ -62,6 +62,14 @@ export const createFigure = (work) => {
 
     figureElement.appendChild(imageElement); //ASSEMBLAGE : on place <img> et <figcaption> dans <figure>
     figureElement.appendChild(captionElement);
+
+    if (isModal) {
+    const trash = document.createElement('button');
+    trash.innerHTML = '<i class="mdi mdi-trash-can-outline"></i>';
+    trash.classList.add('deleteBtn');
+    trash.type = 'button';
+    figureElement.appendChild(trash);
+  }
 
     return figureElement; //on retourne l' élément <figure> complet
 }                                                                      
@@ -76,17 +84,11 @@ const insertInContainer = async () => {
   const modalContainer = document.querySelector('.modalGallery'); 
 
   works.forEach((work) => {
-    // Page d’accueil
-    if (galleryContainer) {
+    if (galleryContainer && modalContainer) {
       galleryContainer.appendChild(createFigure(work));
-    }
-    // Modale (si présente)
-    if (modalContainer) {
-      modalContainer.appendChild(createFigure(work)); // on recrée un élément, pas besoin de clone
+      modalContainer.appendChild(createFigure(work, true));
     }
   });
-}
-
-
+};
 
 insertInContainer(); /*APPEL LA FONCTION !!!!!!*/
