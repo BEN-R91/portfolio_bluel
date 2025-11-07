@@ -6,8 +6,8 @@ console.log(works);
 1. Récupérer les données avec fetch avec une fonction
 2. Créer des images (src + alt) + figcaption + figure dans une fonction
 <figure>
-	<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-	<figcaption>Abajour Tahina</figcaption>
+<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
+<figcaption>Abajour Tahina</figcaption>
 </figure>
 3. Dans une fonction :
 3.1 Boucler (faire une boucle au sens JS) sur le tableau récupéré en 1. pour construire les figures avec la fonction 2.
@@ -17,72 +17,73 @@ console.log(works);
 export let works = [];
 
 /**
- * Récupération des données.
- * 
- * @typedef Work
- * @type {object}
- * @property {number} id - L'id de l'objet
- * @property {string} title - Nom du projet
- * @property {string} imageUrl - L'URL de la vignette associée au projet
- * @property {number} categoryId - Identifiant de la catégorie associée
- * @property {number} userId - Identifiant de l'auteur
- * @property {Category} category - Catégorie associée
- */
+* Récupération des données.
+* 
+* @typedef Work
+* @type {object}
+* @property {number} id - L'id de l'objet
+* @property {string} title - Nom du projet
+* @property {string} imageUrl - L'URL de la vignette associée au projet
+* @property {number} categoryId - Identifiant de la catégorie associée
+* @property {number} userId - Identifiant de l'auteur
+* @property {Category} category - Catégorie associée
+*/
 const getWorks = async () => {              
-    try {
-        const response = await fetch('http://localhost:5678/api/works');
-        works = await response.json();
-        console.log("Récupération des travaux terminée", works)
-
-        /*if (!response.ok) { <= le "!" indique le contraire de la condition à côté, si ok = true, alors !ok = false
-           // Alors j'affiche à l'utilisateur que le chargement a eu un souci. 
-        }*/
-    } catch (error) { 
-        console.error("Erreur lors de la récupération des travaux", error);
-        return [];
-    }
+  try {
+    const response = await fetch('http://localhost:5678/api/works');
+    works = await response.json();
+    console.log("Récupération des travaux terminée", works)
+    
+    /*if (!response.ok) { <= le "!" indique le contraire de la condition à côté, si ok = true, alors !ok = false
+    // Alors j'affiche à l'utilisateur que le chargement a eu un souci. 
+    }*/
+  } catch (error) { 
+    console.error("Erreur lors de la récupération des travaux", error);
+    return [];
+  }
 }
 
 /**
- * Création des éléments pour chaques données
- * 
- * @param {Work} work - Projet à passer en paramètre pour créer la vignette associée
- * 
- * @returns {HTMLElement} Retourne la <figure> créée pour le projet
- */
+* Création des éléments pour chaques données
+* 
+* @param {Work} work - Projet à passer en paramètre pour créer la vignette associée
+* 
+* @returns {HTMLElement} Retourne la <figure> créée pour le projet
+*/
 export const createFigure = (work, isModal = false) => {
-    const figureElement = document.createElement('figure'); 
-    
-    const imageElement = document.createElement('img'); 
-    imageElement.src = work.imageUrl; 
-    imageElement.alt = work.title; 
-
-    const captionElement = document.createElement('figcaption'); 
-    captionElement.innerText = work.title;
-
-    figureElement.appendChild(imageElement); //ASSEMBLAGE : on place <img> et <figcaption> dans <figure>
-    figureElement.appendChild(captionElement);
-
-    if (isModal) {
+  const figureElement = document.createElement('figure'); 
+  
+  const imageElement = document.createElement('img'); 
+  imageElement.src = work.imageUrl; 
+  imageElement.alt = work.title; 
+  figureElement.appendChild(imageElement); //ASSEMBLAGE : on place <img> et <figcaption> dans <figure>
+  
+  
+  
+  if (isModal) {
     const trash = document.createElement('button');
     trash.innerHTML = '<i class="mdi mdi-trash-can-outline"></i>';
     trash.classList.add('deleteBtn');
     trash.type = 'button';
     figureElement.appendChild(trash);
+  } else {
+    const captionElement = document.createElement('figcaption'); 
+    captionElement.innerText = work.title;
+    figureElement.appendChild(captionElement);
   }
-
-    return figureElement; //on retourne l' élément <figure> complet
+  
+  return figureElement; //on retourne l' élément <figure> complet
 }                                                                      
 
 /**
- * On "coordonne" getWorks et creatFigure et on les insert dans le DOM (<div class="gallery"></div>)
- */
+* On "coordonne" getWorks et creatFigure et on les insert dans le DOM (<div class="gallery"></div>)
+*/
 const insertInContainer = async () => {
   await getWorks(); 
-
+  
   const galleryContainer = document.querySelector('.gallery'); 
-  const modalContainer = document.querySelector('.modalGallery'); 
-
+  const modalContainer = document.querySelector('.editModal article section'); 
+  
   works.forEach((work) => {
     if (galleryContainer && modalContainer) {
       galleryContainer.appendChild(createFigure(work));

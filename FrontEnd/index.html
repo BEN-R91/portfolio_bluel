@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="./assets/modal.css">
+	<link rel="stylesheet" href="./assets/editModal.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"/>
 	
 	<script src="assets/js/edit-mode.js" type="module"></script>
@@ -51,9 +52,16 @@
 				<button class="edit-button"><i class="mdi mdi-square-edit-outline"></i>Modifier</button>
 			</div>
 			<dialog class="editModal">
-				<button class="closeModal"><i class="mdi mdi-close"></i></button>
-  				<h3>Galerie photo</h3>
-				<div class="modalGallery"></div>
+				<article>
+					<header>
+						<button><i class="mdi mdi-close"></i></button>
+						<h3>Galerie photo</h3>
+					</header>
+					<section></section>
+					<footer>
+						<button>Ajouter une photo</button>
+					</footer>
+				</div>
 			</dialog>
 			<div class="gallery"></div>
 		</section>
