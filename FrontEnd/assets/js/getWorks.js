@@ -70,14 +70,21 @@ export const createFigure = (work) => {
  * On "coordonne" getWorks et creatFigure et on les insert dans le DOM (<div class="gallery"></div>)
  */
 const insertInContainer = async () => {
-    await getWorks(); //On attend que getWorks soit terminé
-    const galleryContainer = document.querySelector('.gallery'); //On cible .gallery
+  await getWorks(); 
 
-    works.forEach((work) => {
-        const workFigure = createFigure(work);
-        galleryContainer.appendChild(workFigure);
-        // galleryContainer.appendChild(createFigure(work)); <= à privilégier pour éviter de créer une variable
-    })
+  const galleryContainer = document.querySelector('.gallery'); 
+  const modalContainer = document.querySelector('.modalGallery'); 
+
+  works.forEach((work) => {
+    // Page d’accueil
+    if (galleryContainer) {
+      galleryContainer.appendChild(createFigure(work));
+    }
+    // Modale (si présente)
+    if (modalContainer) {
+      modalContainer.appendChild(createFigure(work)); // on recrée un élément, pas besoin de clone
+    }
+  });
 }
 
 
