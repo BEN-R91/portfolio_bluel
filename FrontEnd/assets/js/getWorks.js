@@ -15,7 +15,7 @@ console.log(works);
 */
 
 export let works = [];
-
+import { deleteWork } from "./deleteWork.js";
 /**
 * Récupération des données.
 * 
@@ -66,6 +66,13 @@ export const createFigure = (work, isModal = false) => {
     trash.classList.add('deleteBtn');
     trash.type = 'button';
     figureElement.appendChild(trash);
+
+    trash.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const confirmDelete = confirm("Supprimer ce projet ?");
+      if (!confirmDelete) return;
+      await deleteWork(work.id);
+    });
   } else {
     const captionElement = document.createElement('figcaption'); 
     captionElement.innerText = work.title;
