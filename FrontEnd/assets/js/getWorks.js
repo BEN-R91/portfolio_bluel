@@ -1,24 +1,7 @@
-/*const reponse = await fetch("http://localhost:5678/api/works");
-const works = await reponse.json();
-console.log(works);
-
-/*
-1. Récupérer les données avec fetch avec une fonction
-2. Créer des images (src + alt) + figcaption + figure dans une fonction
-<figure>
-<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-<figcaption>Abajour Tahina</figcaption>
-</figure>
-3. Dans une fonction :
-3.1 Boucler (faire une boucle au sens JS) sur le tableau récupéré en 1. pour construire les figures avec la fonction 2.
-3.2 Insérer chaque figure dans le container approprié (<div class="gallery"></div>)
-*/
-
 export let works = [];
 import { deleteWork } from "./deleteWork.js";
 /**
 * Récupération des données.
-* 
 * @typedef Work
 * @type {object}
 * @property {number} id - L'id de l'objet
@@ -51,7 +34,8 @@ const getWorks = async () => {
 * @returns {HTMLElement} Retourne la <figure> créée pour le projet
 */
 export const createFigure = (work, isModal = false) => {
-  const figureElement = document.createElement('figure'); 
+  const figureElement = document.createElement('figure');
+  figureElement.dataset.id = work.id;
   
   const imageElement = document.createElement('img'); 
   imageElement.src = work.imageUrl; 
