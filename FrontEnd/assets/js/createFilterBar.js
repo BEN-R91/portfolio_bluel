@@ -1,7 +1,9 @@
 /** */
 
 import { works, createFigure } from './getWorks';                                      
-import { isLogged } from './edit-mode';                                      
+import { isLogged } from './edit-mode';  
+
+export let categories = [];
 
 /**
 * On récupere l' ID des différentes cat
@@ -16,7 +18,7 @@ import { isLogged } from './edit-mode';
 const getCategories = async () => {
     try {
         const response = await fetch('http://localhost:5678/api/categories');
-        const categories = await response.json();
+        categories = await response.json();
         console.log("Récupération des categories terminée", categories);
         return categories;
     } catch (error) {

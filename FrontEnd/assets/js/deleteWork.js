@@ -9,17 +9,11 @@ export async function deleteWork(workId) {
       },
     });
     if (response.ok) {
-      const elementsToRemove = document.querySelectorAll(`[data-id="${workId}"]`);  //** voir selection par id defini ds getWorks */
-      
-      // 4️⃣ Supprimer chaque élément du DOM
-      elementsToRemove.forEach((element) => {
-        element.remove();
-      });
-    } 
-    else {
-      alert("Échec de la suppression du projet ❌");
+      document.querySelectorAll(`[data-id="${workId}"]`).forEach((element) => element.remove());
+    } else {
+      alert("Échec de la suppression du projet");
     }
   } catch (error) {
-    alert("Erreur lors de la suppression !");
+    alert("Erreur lors de la suppression");
   }
 }

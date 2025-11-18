@@ -59,9 +59,37 @@
 					</header>
 					<section></section>
 					<footer>
-						<button>Ajouter une photo</button>
+						<button id="addPhotoButton">Ajouter une photo</button>
 					</footer>
 				</article>
+			</dialog>
+			<dialog class="editModal" id="addPhotoModal">
+    			<article>
+        			<header>
+            			<button id="closeAddPhotoModal"><i class="mdi mdi-close"></i></button>
+            			<button id="backToGalleryModal"><i class="mdi mdi-arrow-left"></i></button> 
+            			<h3>Ajout photo</h3>
+        			</header>
+        			<section>
+            			<form>
+							<label for="file">+ Ajouter photo</label>
+							<input class="sr-only" type="file" id="file" name="file" aria-describedby="file_format" />
+							<p id="file_format">jpg, png : 4mo max</p>
+
+							<label for="title">Titre</label>
+							<input placeholder="Indiquer votre titre" type="text" name="title" id="title" />
+
+							<label for="category">Catégorie</label>
+							<select name="category" id="category">
+								<option value="1">Objets</option>
+								<option value="2">Appartements</option>
+								<option value="3">Hotels & restaurants</option>
+							</select>
+
+							<button type="submit">Valider</button>
+						</form>
+        			</section>
+    			</article>
 			</dialog>
 			<div class="gallery"></div>
 		</section>

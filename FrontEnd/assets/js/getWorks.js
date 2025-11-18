@@ -1,5 +1,7 @@
-export let works = [];
 import { deleteWork } from "./deleteWork.js";
+
+export let works = [];
+
 /**
 * Récupération des données.
 * @typedef Work
@@ -16,10 +18,6 @@ const getWorks = async () => {
     const response = await fetch('http://localhost:5678/api/works');
     works = await response.json();
     console.log("Récupération des travaux terminée", works)
-    
-    /*if (!response.ok) { <= le "!" indique le contraire de la condition à côté, si ok = true, alors !ok = false
-    // Alors j'affiche à l'utilisateur que le chargement a eu un souci. 
-    }*/
   } catch (error) { 
     console.error("Erreur lors de la récupération des travaux", error);
     return [];
@@ -35,14 +33,12 @@ const getWorks = async () => {
 */
 export const createFigure = (work, isModal = false) => {
   const figureElement = document.createElement('figure');
-  figureElement.dataset.id = work.id;
+  figureElement.dataset.id = work.id; //>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   
   const imageElement = document.createElement('img'); 
   imageElement.src = work.imageUrl; 
   imageElement.alt = work.title; 
   figureElement.appendChild(imageElement); //ASSEMBLAGE : on place <img> et <figcaption> dans <figure>
-  
-  
   
   if (isModal) {
     const trash = document.createElement('button');
@@ -53,8 +49,8 @@ export const createFigure = (work, isModal = false) => {
 
     trash.addEventListener('click', async (e) => {
       e.preventDefault();
-      const confirmDelete = confirm("Supprimer ce projet ?");
-      if (!confirmDelete) return;
+      const confirmDelete = confirm("Supprimer ce projet ?"); //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> le top !!! UTILISER LES FONCTIONS NATIVES des navigateurs
+      if (!confirmDelete) return; 
       await deleteWork(work.id);
     });
   } else {
