@@ -11,12 +11,14 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="./assets/modal.css">
 	<link rel="stylesheet" href="./assets/editModal.css">
+	<link rel="stylesheet" href="./assets/addModal.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"/>
 	
 	<script src="assets/js/edit-mode.js" type="module"></script>
 	<script src="assets/js/getWorks.js" type="module"></script>
 	<script src="assets/js/createFilterBar.js" type="module"></script>
 	<script src="assets/js/openModal.js" type="module"></script>
+	<script src="assets/js/addWork.js" type="module"></script>
 </head>
 <body>
 	<div class="edit-mode-banner" style="display:none">
@@ -63,30 +65,42 @@
 					</footer>
 				</article>
 			</dialog>
-			<dialog class="editModal" id="addPhotoModal">
+			<dialog class="addModal" id="addPhotoModal">
     			<article>
         			<header>
-            			<button id="closeAddPhotoModal"><i class="mdi mdi-close"></i></button>
-            			<button id="backToGalleryModal"><i class="mdi mdi-arrow-left"></i></button> 
+            			<div>
+							<button id="backToGalleryModal">
+								<i class="mdi mdi-arrow-left"></i>
+							</button> 
+							<button id="closeAddPhotoModal">
+								<i class="mdi mdi-close"></i>
+							</button>
+						</div>
             			<h3>Ajout photo</h3>
         			</header>
         			<section>
             			<form>
-							<label for="file">+ Ajouter photo</label>
-							<input class="sr-only" type="file" id="file" name="file" aria-describedby="file_format" />
-							<p id="file_format">jpg, png : 4mo max</p>
-
+							<div>
+								<img src="/assets/images/image.svg" alt=""/>
+								<label role="button" for="file">+ Ajouter photo</label>
+								<input class="sr-only" type="file" id="file" name="file" aria-describedby="file_format" />
+								<p id="file_format">jpg, png : 4mo max</p>
+							</div>
+							
 							<label for="title">Titre</label>
-							<input placeholder="Indiquer votre titre" type="text" name="title" id="title" />
+							<input name="title" id="title" />
 
 							<label for="category">Catégorie</label>
 							<select name="category" id="category">
+								<option value="" selected disabled></option>
 								<option value="1">Objets</option>
 								<option value="2">Appartements</option>
 								<option value="3">Hotels & restaurants</option>
 							</select>
 
-							<button type="submit">Valider</button>
+							<hr/>
+
+							<button class="core-btn filter-btn-active" type="submit">Valider</button>
 						</form>
         			</section>
     			</article>
@@ -103,7 +117,7 @@
 				<input type="email" name="email" id="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<button type="submit" class="core-btn filter-btn-active">Envoyer</button>
+				<button type="submit">Envoyer</button>
 			</form>
 		</section>
 	</main>

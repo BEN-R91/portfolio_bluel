@@ -1,94 +1,84 @@
-.editModal {
-    width: 650px;
-    height: 688px;
-    border: none;
-    border-radius: 5px;
-    
-    &::backdrop {
-        background-color: rgba(0,0,0,0.2);
-    }
-    
+.addModal {
     article {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        
-        header {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
 
-            button {
-                align-self: flex-end;
-                background: none;
-                border: none;
-                cursor: pointer;
-                width: 1.5rem;
-                height: 1.5rem;
-                padding: 0;
-                margin: 0;
-                
-                i {
-                    font-size: 1.25rem;
-                }
+        header {
+
+            div {
+                display: flex;
+                justify-content: space-between;
             }
-            
+
             h3 {
+                text-align: center;
                 font-size: 26px;
+                margin-top: 10px;
             }
         }
-        
+
         section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem 0.5rem;
-            padding: 3rem 0;
-            margin: 0 6.5rem 2.5rem;
-            border-bottom: 1px solid #b3b3b3;
-            
-            figure {
-                position: relative;
-                width: 5rem;
+            padding: 0px 106px;
+
+            form {
+                display: flex;
+                flex-direction: column;
                 
-                img {
-                    width: 100%;
-                }
-                
-                button {
-                    position: absolute;
-                    top: 6px;
-                    right: 6px;
-                    padding: 0;
-                    width: 1.125rem;
-                    height: 1.125rem;
-                    background-color: black;
-                    border: none;
-                    color: white;
-                    cursor: pointer;
+                div {
                     display: flex;
-                    justify-content: center;
+                    flex-direction: column;
                     align-items: center;
-                    border-radius: 0.25rem;
-                    
-                    i {
-                        margin: 0;
+                    gap: 8px;
+                    background-color: #E8F1F6;
+                    border-radius: 4px;
+                    padding: 16px 8px;
+                    margin-bottom: 10px;
+
+                    img {
+                        height: 60px;
+                    }
+
+                    label {
+                        --button-height: 34px;
+
+                        height: var(--button-height);
+                        background-color: #CBD6DC;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 34px;
+                        border-radius: calc(var(--button-height) / 2);
+                        font-size: 14px;
+                        color: #306685;
+                        cursor: pointer;
+                    }
+
+                    p {
+                        font-size: 10px;
                     }
                 }
-            }
-        }
-        
-        footer {
-            button {
-                width: 14.75rem;
-                height: 2.5rem;
-                border:none;
-                background-color: #1d6154;
-                border-radius: 1.25rem;
-                font-size: 0.75;
-                color: white;
-                font-family: Syne, sans-serif;
-                cursor: pointer;
+
+                > label {
+                    margin: 20px 0 10px;
+                }
+
+                > input,
+                > select {
+                    height: 50px;
+                    border: none;
+                    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.09);
+                }
+
+                > select {
+                    margin-bottom: 15px;
+                }
+
+                hr {
+                    width: 100%;
+                    background-color: #b3b3b3;
+                    margin: 32px 0;
+                }
+
+                button {
+                    align-self: center;
+                }
             }
         }
     }
