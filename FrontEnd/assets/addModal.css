@@ -53,6 +53,11 @@
                     p {
                         font-size: 10px;
                     }
+
+                    .previewImage {
+                        width: 128px;
+                        height: 168px;
+                    }
                 }
 
                 > label {
@@ -78,6 +83,13 @@
 
                 button {
                     align-self: center;
+                }
+
+                .filter-btn-inactive {
+                    background-color: #A7A7A7;
+                    color: white;
+                    border: none;
+                    cursor: not-allowed;
                 }
             }
         }
