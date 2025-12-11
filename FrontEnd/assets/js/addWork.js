@@ -1,6 +1,6 @@
 // ****previewImage
 
-const fileInput = document.getElementById("file");         
+const fileInput = document.getElementById("image");         
 const previewImage = document.querySelector(".addModal form img"); 
 const uploadZone = fileInput.parentElement;               
 
@@ -41,8 +41,8 @@ categorySelect.addEventListener("change", checkForm);
 fileInput.addEventListener("change", checkForm);
 
 function checkForm() {
-    const fileOK = fileInput.files.length > 0; // ***-->> because FileList **
-    const titleOK = titleInput.value.length > 0; //** trim ?? */
+    const fileOK = fileInput.files.length > 0; 
+    const titleOK = titleInput.value.length > 0;
     const categoryOK = categorySelect.value !== "";
     
     if (fileOK && titleOK && categoryOK) {
