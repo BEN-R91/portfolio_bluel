@@ -26,6 +26,7 @@
 		<i class="mdi mdi-square-edit-outline"></i>
 		<p>Mode édition</p>
 	</div>
+	
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -82,15 +83,15 @@
         			<section>
             			<form>
 							<div>
-								<img class="previewImage" src="#" alt="Aperçu du projet" style="display: none;"/> 
+								<!-- <img class="previewImage" src="#" alt="" style="display: none;"/>  -->
 								<img src="/assets/images/image.svg" alt=""/>
 								<label role="button" for="file">+ Ajouter photo</label>
-								<input class="sr-only" type="file" id="file" name="file" aria-describedby="file_format" />
+								<input class="sr-only" accept="image/png, image/jpeg" type="file" id="file" name="file" aria-describedby="file_format" />
 								<p id="file_format">jpg, png : 4mo max</p>
 							</div>
 							
 							<label for="title">Titre</label>
-							<input name="title" id="title" required/>
+							<input name="title" id="title" maxlength="255" required/>
 
 							<label for="category">Catégorie</label>
 							<select name="category" id="category">
@@ -119,7 +120,7 @@
 				<input type="email" name="email" id="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<button type="submit">Envoyer</button>
+				<button class="core-btn filter-btn-active" type="submit">Envoyer</button>
 			</form>
 		</section>
 	</main>
