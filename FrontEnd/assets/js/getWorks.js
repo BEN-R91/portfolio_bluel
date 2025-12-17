@@ -79,4 +79,4 @@ const insertInContainer = async () => {
   });
 };
 
-insertInContainer(); /*APPEL LA FONCTION !!!!!!*/
+insertInContainer();

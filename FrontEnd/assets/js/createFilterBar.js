@@ -38,7 +38,7 @@ const createFiltersContainer = () => {
     const filtersContainer = document.createElement('div');
     filtersContainer.classList.add('filters');
     
-    galleryContainer.insertAdjacentElement('beforebegin', filtersContainer); // ***********************************
+    galleryContainer.insertAdjacentElement('beforebegin', filtersContainer); 
     return filtersContainer;
 }
 
@@ -73,9 +73,9 @@ const createFilterBar = async () => {
         button.addEventListener('click', () => {
             const currentActive = filtersContainer.querySelector('.filter-btn-active');
             if (currentActive) {
-                currentActive.classList.remove('filter-btn-active'); // pour retirer la class active 
+                currentActive.classList.remove('filter-btn-active');  
             }
-            button.classList.add('filter-btn-active'); // pour l' ajouter
+            button.classList.add('filter-btn-active'); 
             //TERNAIRE (if/else en court)
             let filteredWorks = (id === 0) //condition qui verifie si l' id passé à la fonction = 0 (0=Tous)
             ? works //si la condition est VRAIE (pour bouton Tous), filteredWorks reçoit tout le tableau (works => dataset)

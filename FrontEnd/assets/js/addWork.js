@@ -15,10 +15,6 @@ const showImagePreview = () => {
             // previewImage.style.display = "block";
             
             uploadZone.classList.add('div-img')
-            // uploadZone.querySelector('img:not(.previewImage)').style.display = 'none';
-            // uploadZone.querySelector('label').style.display = 'none';
-            // uploadZone.querySelector('p').style.display = 'none';
-            
         };
         
         // On démarre la lecture pour créer l'adresse temporaire
